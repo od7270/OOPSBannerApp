@@ -1,58 +1,48 @@
 public class OOPSBannerApp {
 
-  public static String[] getOPattern() {
-    return new String[] {
-      "  .***.  ",
-      " *     * ",
-      "**     **",
-      "**     **",
-      " *     * ",
-      "   ***   "
-    };
-  }
+    public static void main(String[] args) {
 
-  public static String[] getPPattern() {
-    return new String[] {
-      "*******. ",
-      "**     **",
-      "**     **",
-      "*******  ",
-      "**       ",
-      "**       "
-    };
-  }
+        // Create instances for each character
+        CharacterPattern oPattern = new CharacterPattern('O', new String[]{
+            "  .***.  ",
+            " *     * ",
+            "**     **",
+            "**     **",
+            " *     * ",
+            "   ***   "
+        });
 
-  public static String[] getSPattern() {
-    return new String[] {
-      " .*****. ",
-      "**     **",
-      " **.     ",
-      "    ^**. ",
-      "**     **",
-      "  *****  "
-    };
-  }
+        CharacterPattern pPattern = new CharacterPattern('P', new String[]{
+            "*******. ",
+            "**     **",
+            "**     **",
+            "*******  ",
+            "**       ",
+            "**       "
+        });
 
-  public static void main(String[] args) {
-    // String[] lines = {
-    //   String.join(" ", "  .***.  ", "  .***.  ", "*******. ", " .*****. "),
-    //   String.join(" ", " *     * ", " *     * ", "**     **", "**     **"),
-    //   String.join(" ", "**     **", "**     **", "**     **", "***.     "),
-    //   String.join(" ", "**     **", "**     **", "*******  ", "    ^**. "),
-    //   String.join(" ", " *     * ", " *     * ", "**       ", "**     **"),
-    //   String.join(" ", "   ***   ", "   ***   ", "**       ", "  *****  ")
-    // };
+        CharacterPattern sPattern = new CharacterPattern('S', new String[]{
+            " .*****. ",
+            "**     **",
+            " **.     ",
+            "    ^**. ",
+            "**     **",
+            "  *****  "
+        });
 
-    // for (String line: lines) {
-    //   System.out.println(line);
-    // }
+        // Array initialization uses instances to populate banner lines
+        String[] bannerLines = new String[oPattern.getPattern().length];
+        for (int i = 0; i < bannerLines.length; i++) {
+            bannerLines[i] = oPattern.getPattern()[i] + " "
+                            + oPattern.getPattern()[i] + " "
+                            + pPattern.getPattern()[i] + " "
+                            + sPattern.getPattern()[i];
+        }
 
-    String[] oPattern = getOPattern();
-    String[] pPattern = getPPattern();
-    String[] sPattern = getSPattern();
+        // Loop prints the assembled banner
+        for (String line : bannerLines) {
+            System.out.println(line);
+        }
 
-    for ( int i = 0; i < oPattern.length; i++ ) {
-      System.out.println(oPattern[i] + " " + oPattern[i] + " " + pPattern[i] + " " + sPattern[i]);
     }
-  }
 }
