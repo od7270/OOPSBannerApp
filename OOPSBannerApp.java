@@ -1,48 +1,58 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class OOPSBannerApp {
+
+    public static void renderBanner(BannerCharacter[] bannerWord) {
+        int rows = bannerWord[0].getPattern().length;
+        for (int row = 0; row < rows; row++) {
+            StringBuilder line = new StringBuilder();
+            for (int col = 0; col < bannerWord.length; col++) {
+                if (col > 0) line.append(" ");
+                line.append(bannerWord[col].getPattern()[row]);
+            }
+            System.out.println(line);
+        }
+    }
 
     public static void main(String[] args) {
 
-        // Create instances for each character
-        CharacterPattern oPattern = new CharacterPattern('O', new String[]{
+        Map<Character, BannerCharacter> patternMap = new HashMap<>();
+
+        patternMap.put('O', new BannerCharacter('O', new String[]{
             "  .***.  ",
             " *     * ",
             "**     **",
             "**     **",
             " *     * ",
             "   ***   "
-        });
+        }));
 
-        CharacterPattern pPattern = new CharacterPattern('P', new String[]{
+        patternMap.put('P', new BannerCharacter('P', new String[]{
             "*******. ",
             "**     **",
             "**     **",
             "*******  ",
             "**       ",
             "**       "
-        });
+        }));
 
-        CharacterPattern sPattern = new CharacterPattern('S', new String[]{
+        patternMap.put('S', new BannerCharacter('S', new String[]{
             " .*****. ",
             "**     **",
             " **.     ",
             "    ^**. ",
             "**     **",
             "  *****  "
-        });
+        }));
 
-        // Array initialization uses instances to populate banner lines
-        String[] bannerLines = new String[oPattern.getPattern().length];
-        for (int i = 0; i < bannerLines.length; i++) {
-            bannerLines[i] = oPattern.getPattern()[i] + " "
-                            + oPattern.getPattern()[i] + " "
-                            + pPattern.getPattern()[i] + " "
-                            + sPattern.getPattern()[i];
+        String word = "OOPS";
+        BannerCharacter[] bannerWord = new BannerCharacter[word.length()];
+        for (int i = 0; i < word.length(); i++) {
+            bannerWord[i] = patternMap.get(word.charAt(i));
         }
 
-        // Loop prints the assembled banner
-        for (String line : bannerLines) {
-            System.out.println(line);
-        }
+        renderBanner(bannerWord);
 
     }
 }
